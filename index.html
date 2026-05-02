@@ -209,7 +209,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);over
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:2px}
 .cal-dow{text-align:center;font-size:9px;font-weight:700;letter-spacing:.4px;
   color:var(--txt3);padding:2px 0;text-transform:uppercase}
-.cal-day{aspect-ratio:1;border-radius:6px;display:flex;flex-direction:column;
+.cal-day{height:34px;border-radius:6px;display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   font-size:11px;font-weight:600;border:1px solid transparent;position:relative;cursor:default}
 .cal-day.empty{background:transparent}
@@ -220,6 +220,35 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);over
 .cal-day.today-mark{border-color:var(--gold)!important;color:var(--gold)!important}
 .cal-dot{width:3px;height:3px;border-radius:50%;background:currentColor;position:absolute;bottom:2px;opacity:.8}
 .cal-legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;font-size:9px;color:var(--txt2);padding:0 2px}
+.cal-day.no-rec.is-sat{background:rgba(74,158,255,.08);color:var(--blue);opacity:.8}
+.cal-day.no-rec.is-sun{opacity:.3}
+.cal-day.has-rec,.cal-day.has-neg,.cal-day.is-cmt{cursor:pointer}
+
+/* ── SEARCH ── */
+.search-wrap{position:relative;margin-bottom:10px}
+.search-input{width:100%;background:var(--s1);border:1px solid var(--border);border-radius:12px;
+  padding:10px 14px 10px 40px;font-size:14px;font-family:'DM Sans',sans-serif;
+  color:var(--txt);outline:none;transition:border-color .2s}
+.search-input:focus{border-color:var(--gold)}
+.search-input::placeholder{color:var(--txt3)}
+.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none;line-height:1}
+
+/* ── WEEK HEADER ── */
+.week-hdr{display:flex;justify-content:space-between;align-items:center;
+  padding:8px 6px 4px;margin-top:4px}
+.week-hdr-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--txt3)}
+.week-hdr-val{font-family:'DM Mono',monospace;font-size:11px;font-weight:600}
+
+/* ── BAR CHART ── */
+.chart-wrap{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:14px 12px 10px;margin-bottom:14px}
+.chart-bars{display:flex;align-items:flex-end;gap:1.5px;height:56px}
+.chart-bar{flex:1;border-radius:3px 3px 0 0;min-height:2px;transition:opacity .2s}
+.chart-bar.pos{background:rgba(61,220,132,.7)}
+.chart-bar.neg{background:rgba(255,79,79,.6)}
+.chart-bar.cmt{background:rgba(74,158,255,.6)}
+.chart-bar.empty{background:var(--s3);min-height:3px;opacity:.5}
+.chart-labels{display:flex;gap:1.5px;margin-top:3px}
+.chart-lbl{flex:1;text-align:center;font-size:7px;color:var(--txt3);overflow:hidden}
 
 
 /* ── FİNANS ── */
@@ -293,6 +322,70 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);over
   text-align:center;cursor:pointer;transition:border-color .2s;letter-spacing:.5px}
 .picker-btn:active,.picker-btn.focus{border-color:var(--gold)}
 .picker-btn.placeholder{color:var(--txt3);font-size:14px;letter-spacing:0}
+
+/* ── GÜN DETAY MODAL ── */
+.day-detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:600;display:none;align-items:flex-end}
+.day-detail-overlay.open{display:flex}
+.day-detail-sheet{width:100%;background:var(--picker-sheet-bg);border-radius:20px 20px 0 0;
+  border-top:1px solid var(--border2);padding:0 0 env(safe-area-inset-bottom,20px)}
+.day-detail-hdr{display:flex;justify-content:space-between;align-items:center;
+  padding:14px 18px 12px;border-bottom:1px solid var(--border)}
+.day-detail-title{font-size:15px;font-weight:700;color:var(--txt)}
+.day-detail-body{padding:16px 18px;max-height:60vh;overflow-y:auto}
+.dd-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.dd-stat{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center}
+.dd-stat-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--txt2);margin-bottom:5px}
+.dd-stat-val{font-family:'DM Mono',monospace;font-size:18px;font-weight:600}
+.dd-actions{display:flex;gap:10px;margin-top:14px}
+.dd-btn-edit{flex:1;padding:13px;border-radius:12px;border:1px solid var(--border2);
+  background:var(--s2);color:var(--txt);font-size:14px;font-weight:600;
+  font-family:'DM Sans',sans-serif;cursor:pointer}
+.dd-btn-del{flex:1;padding:13px;border-radius:12px;border:none;
+  background:var(--red);color:#fff;font-size:14px;font-weight:700;
+  font-family:'DM Sans',sans-serif;cursor:pointer}
+
+/* ── ARAMA ── */
+.search-wrap{position:relative;margin-bottom:12px}
+.search-input{width:100%;background:var(--s1);border:1px solid var(--border);border-radius:12px;
+  padding:11px 36px 11px 38px;font-size:14px;font-family:'DM Sans',sans-serif;
+  color:var(--txt);outline:none;transition:border-color .2s}
+.search-input:focus{border-color:var(--gold)}
+.search-input::placeholder{color:var(--txt3)}
+.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:15px;pointer-events:none;opacity:.45}
+.search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--txt3);font-size:17px;cursor:pointer;padding:4px;line-height:1}
+.search-empty{text-align:center;padding:28px 0;font-size:13px;color:var(--txt2)}
+
+/* ── HAFTALIK ÖZET ── */
+.week-hdr{display:flex;justify-content:space-between;align-items:center;
+  padding:6px 2px 5px;margin-top:6px}
+.week-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--txt3)}
+.week-sum{font-family:'DM Mono',monospace;font-size:11px;font-weight:600;
+  padding:2px 8px;border-radius:20px}
+.week-sum.plus{color:var(--green);background:rgba(61,220,132,.1)}
+.week-sum.minus{color:var(--red);background:rgba(255,79,79,.08)}
+.week-sum.zero{color:var(--txt3)}
+
+/* ── BAR CHART ── */
+.chart-wrap{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);
+  padding:14px 12px 10px;margin-bottom:14px;overflow:hidden}
+.chart-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;
+  color:var(--gold);margin-bottom:2px}
+
+/* ── TAKVİM HAFTA SONU ── */
+.cal-day.weekend-sat{color:var(--blue);opacity:.45}
+.cal-day.weekend-sun{color:var(--red);opacity:.4}
+.cal-day.has-rec.clickable,.cal-day.has-neg.clickable,.cal-day.is-cmt.clickable{cursor:pointer}
+.cal-day.clickable:active{transform:scale(.92);transition:transform .1s}
+
+/* ── YEDEK HATIRLATICI ── */
+.backup-bar{background:rgba(232,160,32,.1);border:1px solid rgba(232,160,32,.25);
+  border-radius:10px;padding:10px 12px;font-size:12px;color:var(--txt2);
+  margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.backup-bar b{color:var(--gold)}
+.backup-bar-btn{background:var(--gold);color:#000;border:none;border-radius:8px;
+  padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer;
+  font-family:'DM Sans',sans-serif;white-space:nowrap;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -420,10 +513,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);over
     <div class="scard"><div class="slbl">Toplam Mesai</div><div class="sval" id="s-toplam2">0dk</div></div>
     <div class="scard"><div class="slbl">Toplam Mesai Ücreti</div><div class="sval green" id="s-ucret2">₺—</div></div>
   </div>
+  <div id="chart-view" style="margin-bottom:12px"></div>
   <div id="cal-view" style="margin-bottom:14px"></div>
   <div class="lhdr">
     <div class="ltitle" id="ltitle">Kayıtlar</div>
     <button class="btn-danger" onclick="clearMonth()">Ayı Sil</button>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="search-input" type="text" placeholder="Gün, tarih veya not ara…" oninput="filterRecords(this.value)">
+    <button class="search-clear" id="search-clear" style="display:none" onclick="clearSearch()">✕</button>
   </div>
   <div id="records-list"></div>
 </div>
@@ -563,6 +662,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);over
 
   <div class="card">
     <div class="ctitle">Veri Yedekleme</div>
+    <div id="backup-reminder-bar"></div>
     <div style="font-size:12px;color:var(--txt2);margin-bottom:14px;line-height:1.6">Telefon değiştirirken tüm verilerinizi yedekleyip yeni telefona aktarabilirsiniz.</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
       <button type="button" onclick="exportData()" style="padding:12px 8px;border-radius:12px;border:1px solid var(--border2);background:var(--s2);color:var(--txt);font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer">
@@ -573,6 +673,25 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);over
       </button>
       <input type="file" id="import-file" accept=".json" onchange="importData(event)" style="display:none">
     </div>
+  </div>
+
+  <div class="card">
+    <div class="ctitle">Hatırlatıcı</div>
+    <div class="toggle-row" style="margin-bottom:0">
+      <div>
+        <div class="toggle-label">Günlük Hatırlatıcı</div>
+        <div class="toggle-sub" id="notif-sub">Kayıt girilmediğinde bildir</div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="chk-notif" onchange="toggleNotif(this.checked)">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <div id="notif-time-row" style="display:none;margin-top:12px">
+      <div class="set-label">Hatırlatma Saati</div>
+      <button class="picker-btn" id="btn-notif-time" onclick="openPicker('notif-time')">19:00</button>
+    </div>
+    <div id="notif-status" style="font-size:11px;margin-top:8px;display:none"></div>
   </div>
 </div>
 
@@ -593,6 +712,28 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);over
       <!-- Ay grid -->
       <div id="mp-month-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:4px"></div>
     </div>
+  </div>
+</div>
+
+<!-- ══ GÜN DETAY MODAL ══ -->
+<div class="edit-overlay" id="daydetail-overlay" onclick="if(event.target===this)closeDayDetail()">
+  <div class="edit-sheet">
+    <div class="edit-sheet-hdr">
+      <span class="edit-sheet-title" id="daydetail-title"></span>
+      <button class="edit-sheet-done" onclick="closeDayDetail()">Kapat</button>
+    </div>
+    <div class="edit-sheet-body" id="daydetail-body" style="padding:16px 18px 8px"></div>
+  </div>
+</div>
+
+<!-- ══ GÜN DETAY MODAL ══ -->
+<div class="day-detail-overlay" id="day-detail-overlay" onclick="if(event.target===this)closeDayDetail()">
+  <div class="day-detail-sheet">
+    <div class="day-detail-hdr">
+      <span class="day-detail-title" id="day-detail-title">—</span>
+      <button class="edit-sheet-done" onclick="closeDayDetail()">Kapat</button>
+    </div>
+    <div class="day-detail-body" id="day-detail-body"></div>
   </div>
 </div>
 
@@ -761,9 +902,9 @@ function openPicker(type){
     if(!editState.giris&&type==='edit-giris') editState.giris=pad(curH)+':'+pad(curM);
     if(!editState.cikis&&type==='edit-cikis') editState.cikis=pad(curH)+':'+pad(curM);
   }
-  else if(type==='set-baslangic'||type==='set-bitis'){
-    title.textContent=type==='set-baslangic'?'İş Başlangıç Saati':'Mesai Bitiş Saati';
-    const src=type==='set-baslangic'?settings.baslangic:settings.bitis;
+  else if(type==='set-baslangic'||type==='set-bitis'||type==='notif-time'){
+    title.textContent=type==='set-baslangic'?'İş Başlangıç Saati':type==='set-bitis'?'Mesai Bitiş Saati':'Hatırlatma Saati';
+    const src=type==='notif-time'?(localStorage.getItem('mesai_notif_time')||'19:00'):type==='set-baslangic'?settings.baslangic:settings.bitis;
     const[ch,cm]=src.split(':').map(Number);
     body.innerHTML=buildTimeCol('shcol',ch,'smcol',cm);
     initColScroll('shcol',HOURS,ch,()=>{});
@@ -886,7 +1027,7 @@ function closePicker(){
   }
 
   // Ayarlar saat picker'ları: scrollTop'tan oku
-  if(type==='set-baslangic'||type==='set-bitis'){
+  if(type==='set-baslangic'||type==='set-bitis'||type==='notif-time'){
     const hEl=document.getElementById('shcol');
     const mEl=document.getElementById('smcol');
     if(hEl&&mEl){
@@ -894,8 +1035,14 @@ function closePicker(){
       const m=Math.min(Math.round(mEl.scrollTop/44),59);
       const val=pad(h)+':'+pad(m);
       if(type==='set-baslangic') settings.baslangic=val;
-      else settings.bitis=val;
-      saveSettings();
+      else if(type==='set-bitis') settings.bitis=val;
+      else {
+        localStorage.setItem('mesai_notif_time',val);
+        updateNotifTimeBtn();
+        scheduleNotif();
+        showToast('✓ Hatırlatıcı '+val+' olarak ayarlandı');
+      }
+      if(type!=='notif-time') saveSettings();
     }
   }
 
@@ -1031,11 +1178,20 @@ function calcRecord(giris, cikis, isCmt, isPaz){
     const mesaiMin = brutCalisma - CMT_MOLA_DK;
     return {mesaiMin, farkMin: mesaiMin};
   }
-  // 19:00 sonrası çıkışlarda 10dk son mola düş (sadece hafta içi)
-  const sonMolaDusulen = t2m(cikis) > t2m(SON_MOLA_BASLANGIC) ? SON_MOLA_DK : 0;
+  // 19:00-19:10 mola penceresi:
+  // • 19:00-19:09 arası çıkış → çıkış 19:00 gibi say (o dakikalar sayılmaz)
+  // • 19:10 ve sonrası → tam 10dk kes
+  const molaBasMin = t2m(SON_MOLA_BASLANGIC);
+  const molaBitMin = molaBasMin + SON_MOLA_DK;
+  let efCikisMin = t2m(cikis);
+  if(efCikisMin > molaBasMin && efCikisMin < molaBitMin){
+    efCikisMin = molaBasMin;
+  } else if(efCikisMin >= molaBitMin){
+    efCikisMin -= SON_MOLA_DK;
+  }
   const girisKatki = t2m(settings.baslangic) - t2m(giris);
-  const cikisKatki = t2m(cikis) - t2m(settings.bitis);
-  const mesaiMin = girisKatki + cikisKatki - sonMolaDusulen;
+  const cikisKatki = efCikisMin - t2m(settings.bitis);
+  const mesaiMin = girisKatki + cikisKatki;
   const farkMin = brutCalisma - stdMin();
   return {mesaiMin, farkMin};
 }
@@ -1204,19 +1360,26 @@ function renderCalendar(){
   const isThisMonth=currentKey===todayKey;
   const DOW=['Pt','Sa','Ça','Pe','Cu','Ct','Pz'];
   let html='<div class="cal-wrap">';
-  html+='<div class="cal-grid">'+DOW.map((d,i)=>`<div class="cal-dow" style="${i===6?'color:var(--red);opacity:.7':''}">${d}</div>`).join('')+'</div>';
+  html+='<div class="cal-grid">'+DOW.map((d,i)=>`<div class="cal-dow" style="${i===5?'color:var(--blue);opacity:.8':i===6?'color:var(--red);opacity:.7':''}">${d}</div>`).join('')+'</div>';
   html+='<div class="cal-grid">';
   for(let i=0;i<firstDow;i++) html+=`<div class="cal-day empty"></div>`;
   for(let d=1;d<=daysInMonth;d++){
-    const dow=(firstDow+d-1)%7; // 0=Pzt, 6=Pz
+    const dow=(firstDow+d-1)%7; // Mon=0, Sat=5, Sun=6
+    const isSaturday=dow===5;
     const isSunday=dow===6;
     const r=recMap[d];
     let cls='no-rec';
-    if(r) cls=r.isPaz?'has-neg':r.isCmt?'is-cmt':r.mesaiMin<0?'has-neg':'has-rec';
+    let extraCls='';
+    if(r){
+      cls=r.isPaz?'has-neg':r.isCmt?'is-cmt':r.mesaiMin<0?'has-neg':'has-rec';
+    } else {
+      if(isSaturday) extraCls=' is-sat';
+      if(isSunday) extraCls=' is-sun';
+    }
     if(isThisMonth&&d===now.getDate()) cls+=' today-mark';
-    const sundayMark=isSunday&&!r?`<span style="font-size:6px;position:absolute;top:2px;right:3px;color:var(--red);opacity:.6">✕</span>`:'';
-    html+=`<div class="cal-day ${cls}" style="${isSunday&&!r?'opacity:.4':''}">
-      ${sundayMark}${d}${r?'<span class="cal-dot"></span>':''}
+    const clickable=!!r;
+    html+=`<div class="cal-day ${cls}${extraCls}"${clickable?` onclick="openDayDetail(${d})" style="cursor:pointer"`:''}>
+      ${d}${r?'<span class="cal-dot"></span>':''}
     </div>`;
   }
   html+='</div>';
@@ -1264,17 +1427,16 @@ function makeDayCard(r,showEdit){
 }
 
 function renderList(){
-  const recs=getRecs(currentKey);
-  const list=document.getElementById('records-list');
+  _filterQuery='';
+  const inp=document.getElementById('search-input');
+  if(inp) inp.value='';
+  const clr=document.getElementById('search-clear');
+  if(clr) clr.style.display='none';
   const lt=document.getElementById('ltitle');
   if(lt) lt.textContent=keyLabel(currentKey)+' Kayıtları';
   renderCalendar();
-  if(recs.length===0){
-    list.innerHTML='<div class="empty"><div class="empty-ico">📭</div><div class="empty-txt">Bu ayda henüz kayıt yok.</div></div>';
-    return;
-  }
-  list.innerHTML=recs.map(r=>makeDayCard(r,true)).join('');
-  initSwipe();
+  renderChart();
+  renderListItems();
 }
 
 function initSwipe(){
@@ -1829,6 +1991,223 @@ function importData(e){
   e.target.value='';
 }
 
+// ── CHART ──────────────────────────────────────────────
+function renderChart(){
+  const el=document.getElementById('chart-view');
+  if(!el) return;
+  const recs=getRecs(currentKey);
+  if(recs.length===0){el.innerHTML='';return;}
+  const [y,mo]=currentKey.split('-').map(Number);
+  const daysInMonth=new Date(y,mo,0).getDate();
+  const map={};
+  recs.forEach(r=>map[r.gun]=r);
+  const vals=recs.map(r=>Math.abs(r.mesaiMin));
+  const maxVal=Math.max(...vals,1);
+  let bars='',labels='';
+  for(let d=1;d<=daysInMonth;d++){
+    const r=map[d];
+    if(r){
+      const h=Math.max(4,Math.round((Math.abs(r.mesaiMin)/maxVal)*56));
+      const cls=r.isCmt?'cmt':r.mesaiMin<0?'neg':'pos';
+      bars+=`<div class="chart-bar ${cls}" style="height:${h}px" title="${d}: ${m2s(r.mesaiMin,true)}"></div>`;
+    } else {
+      bars+=`<div class="chart-bar empty"></div>`;
+    }
+    labels+=`<div class="chart-lbl">${d%5===0||d===1?d:''}</div>`;
+  }
+  const toplamMin=recs.reduce((s,r)=>s+r.mesaiMin,0);
+  const ort=recs.length>0?Math.round(toplamMin/recs.length):0;
+  el.innerHTML=`<div class="chart-wrap">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--txt2)">Günlük Dağılım</div>
+      <div style="font-size:10px;color:var(--txt3)">Ort: <span style="color:var(--gold);font-weight:700">${m2s(ort,true)}</span></div>
+    </div>
+    <div class="chart-bars">${bars}</div>
+    <div class="chart-labels">${labels}</div>
+  </div>`;
+}
+
+// ── DAY DETAIL ─────────────────────────────────────────
+function openDayDetail(gun){
+  const recs=getRecs(currentKey);
+  const r=recs.find(x=>x.gun===gun);
+  if(!r) return;
+  const neg=r.mesaiMin<0, zero=r.mesaiMin===0;
+  const mesaiStr=zero?'—':m2s(r.mesaiMin,true);
+  const mesaiColor=neg?'var(--red)':zero?'var(--txt3)':'var(--green)';
+  const u=parseFloat(settings.saatlikUcret)||0;
+  const ucret=u>0&&!zero?fmoney((r.mesaiMin/60)*u):null;
+  const yol=parseFloat(settings.yolParasi)||0;
+  const typeBadge=r.isCmt?`<span style="font-size:11px;font-weight:700;color:var(--blue);background:rgba(74,158,255,.12);border:1px solid rgba(74,158,255,.25);border-radius:6px;padding:2px 8px">CMT</span>`:r.isPaz?`<span style="font-size:11px;font-weight:700;color:var(--red);background:rgba(255,79,79,.1);border:1px solid rgba(255,79,79,.2);border-radius:6px;padding:2px 8px">PAZ</span>`:'';
+  document.getElementById('daydetail-title').textContent=dayMonthLabel(gun,currentKey);
+  document.getElementById('daydetail-body').innerHTML=`
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <div style="flex:1;background:var(--s2);border-radius:12px;padding:14px;text-align:center">
+        <div style="font-size:9px;color:var(--txt2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Giriş</div>
+        <div style="font-family:'DM Mono',monospace;font-size:24px;font-weight:700;color:var(--txt)">${r.giris}</div>
+      </div>
+      <div style="flex:1;background:var(--s2);border-radius:12px;padding:14px;text-align:center">
+        <div style="font-size:9px;color:var(--txt2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Çıkış</div>
+        <div style="font-family:'DM Mono',monospace;font-size:24px;font-weight:700;color:var(--txt)">${r.cikis}</div>
+      </div>
+    </div>
+    <div style="background:var(--s2);border-radius:12px;padding:14px;text-align:center;margin-bottom:12px">
+      <div style="font-size:9px;color:var(--txt2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Mesai ${typeBadge}</div>
+      <div style="font-family:'DM Mono',monospace;font-size:30px;font-weight:700;color:${mesaiColor}">${mesaiStr}</div>
+      ${ucret?`<div style="font-size:13px;color:var(--green);margin-top:4px;font-weight:600">${ucret}</div>`:''}
+      ${yol>0?`<div style="font-size:11px;color:var(--blue);margin-top:3px">+${fmoney(yol)} yol</div>`:''}
+    </div>
+    ${r.not?`<div style="background:var(--s2);border-radius:12px;padding:12px 14px;margin-bottom:12px;font-size:13px;color:var(--txt2)">📝 ${r.not}</div>`:''}
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-bottom:8px">
+      <button onclick="closeDayDetail();openEdit(${r.ts})" style="padding:13px;border-radius:12px;border:1px solid var(--border2);background:var(--s2);color:var(--txt);font-size:14px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer">✏️ Düzenle</button>
+      <button onclick="closeDayDetail();showConfirm('Kaydı Sil','${dayMonthLabel(gun,currentKey)} kaydı silinecek.',()=>deleteRecord(${r.ts}))" style="padding:13px;border-radius:12px;border:none;background:rgba(255,79,79,.12);color:var(--red);font-size:14px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer">🗑 Sil</button>
+    </div>`;
+  document.getElementById('daydetail-overlay').classList.add('open');
+}
+function closeDayDetail(){
+  document.getElementById('daydetail-overlay').classList.remove('open');
+}
+
+// ── FILTER + WEEKLY LIST ────────────────────────────────
+let _filterQuery='';
+function filterRecords(q){
+  _filterQuery=(q||'').toLowerCase().trim();
+  const clr=document.getElementById('search-clear');
+  if(clr) clr.style.display=_filterQuery?'block':'none';
+  renderListItems();
+}
+function clearSearch(){
+  _filterQuery='';
+  const inp=document.getElementById('search-input');
+  if(inp) inp.value='';
+  const clr=document.getElementById('search-clear');
+  if(clr) clr.style.display='none';
+  renderListItems();
+}
+function filterList(q){ filterRecords(q); }
+
+function getISOWeek(date){
+  const d=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate()));
+  d.setUTCDate(d.getUTCDate()+4-(d.getUTCDay()||7));
+  const y=new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  return Math.ceil((((d-y)/86400000)+1)/7);
+}
+
+function renderListItems(){
+  const allRecs=getRecs(currentKey);
+  const list=document.getElementById('records-list');
+  if(!list) return;
+  let recs=allRecs;
+  if(_filterQuery){
+    recs=allRecs.filter(r=>{
+      const dl=dayMonthLabel(r.gun,currentKey).toLowerCase();
+      const nl=(r.not||'').toLowerCase();
+      const tl=(r.giris+' '+r.cikis);
+      return dl.includes(_filterQuery)||nl.includes(_filterQuery)||tl.includes(_filterQuery)||String(r.gun)===_filterQuery;
+    });
+  }
+  if(recs.length===0){
+    list.innerHTML=_filterQuery
+      ?`<div class="empty"><div class="empty-ico">🔍</div><div class="empty-txt">"${_filterQuery}" için sonuç yok.</div></div>`
+      :'<div class="empty"><div class="empty-ico">📭</div><div class="empty-txt">Bu ayda henüz kayıt yok.</div></div>';
+    return;
+  }
+  // Group by ISO week
+  const [ky,kmo]=currentKey.split('-').map(Number);
+  const groups=[];
+  let curWeek=null, curGroup=[];
+  recs.forEach(r=>{
+    const wk=getISOWeek(new Date(ky,kmo-1,r.gun));
+    if(wk!==curWeek){
+      if(curGroup.length) groups.push({week:curWeek,recs:curGroup});
+      curWeek=wk; curGroup=[r];
+    } else { curGroup.push(r); }
+  });
+  if(curGroup.length) groups.push({week:curWeek,recs:curGroup});
+
+  let html='';
+  groups.forEach(g=>{
+    const wt=g.recs.reduce((s,r)=>s+(r.mesaiMin||0),0);
+    const wc=wt>0?'var(--green)':wt<0?'var(--red)':'var(--txt3)';
+    html+=`<div class="week-hdr">
+      <div class="week-hdr-lbl">Hafta ${g.week}</div>
+      <div class="week-hdr-val" style="color:${wc}">${m2s(wt,true)}</div>
+    </div>`;
+    html+=g.recs.map(r=>makeDayCard(r,true)).join('');
+  });
+  list.innerHTML=html;
+  initSwipe();
+}
+
+// ── NOTİFİKASYON ───────────────────────────────────────
+let _notifTimer=null;
+function toggleNotif(checked){
+  if(!checked){
+    localStorage.setItem('mesai_notif','0');
+    document.getElementById('notif-time-row').style.display='none';
+    document.getElementById('notif-status').style.display='none';
+    if(_notifTimer){clearTimeout(_notifTimer);_notifTimer=null;}
+    return;
+  }
+  if(!('Notification' in window)){
+    showToast('⚠️ Bildirim bu tarayıcıda desteklenmiyor');
+    document.getElementById('chk-notif').checked=false;
+    return;
+  }
+  Notification.requestPermission().then(perm=>{
+    if(perm==='granted'){
+      localStorage.setItem('mesai_notif','1');
+      document.getElementById('notif-time-row').style.display='block';
+      const ns=document.getElementById('notif-status');
+      ns.style.display='block';
+      ns.style.color='var(--green)';
+      ns.textContent='✓ Bildirimler açık';
+      updateNotifTimeBtn();
+      scheduleNotif();
+      showToast('✓ Hatırlatıcı açıldı');
+    } else {
+      showToast('⚠️ Bildirim izni verilmedi');
+      document.getElementById('chk-notif').checked=false;
+    }
+  });
+}
+function updateNotifTimeBtn(){
+  const t=localStorage.getItem('mesai_notif_time')||'19:00';
+  const btn=document.getElementById('btn-notif-time');
+  if(btn) btn.textContent=t;
+}
+function initNotifUI(){
+  if(!('Notification' in window)) return;
+  const on=localStorage.getItem('mesai_notif')==='1'&&Notification.permission==='granted';
+  const chk=document.getElementById('chk-notif');
+  if(chk) chk.checked=on;
+  if(on){
+    document.getElementById('notif-time-row').style.display='block';
+    const ns=document.getElementById('notif-status');
+    ns.style.display='block';ns.style.color='var(--green)';ns.textContent='✓ Bildirimler açık';
+    updateNotifTimeBtn();
+    scheduleNotif();
+  }
+}
+function scheduleNotif(){
+  if(_notifTimer){clearTimeout(_notifTimer);_notifTimer=null;}
+  const t=localStorage.getItem('mesai_notif_time')||'19:00';
+  const [h,m]=t.split(':').map(Number);
+  const target=new Date();
+  target.setHours(h,m,0,0);
+  let ms=target-new Date();
+  if(ms<0) ms+=86400000;
+  _notifTimer=setTimeout(()=>{
+    const todayKey2=mkKey(new Date().getFullYear(),new Date().getMonth());
+    const todayRecs=getRecs(todayKey2);
+    const todayGun=new Date().getDate();
+    if(!todayRecs.some(r=>r.gun===todayGun)&&Notification.permission==='granted'){
+      new Notification('⏱ Mesai Takip',{body:'Bugünün mesai kaydını girmeyi unutmayın!'});
+    }
+    scheduleNotif();
+  },ms);
+}
+
 // ── TOAST ──────────────────────────────────────────────
 function showToast(msg){
   const t=document.getElementById('toast');
@@ -1836,6 +2215,80 @@ function showToast(msg){
   setTimeout(()=>t.classList.remove('show'),2500);
 }
 
+
+// ── ÖRNEK VERİ ─────────────────────────────────────────
+(function seedDemo(){
+  if(localStorage.getItem('mesai_demo_seeded')) return;
+  // Ayarlar
+  const s={baslangic:'08:00',bitis:'17:00',saatlikUcret:'150',yolParasi:'100',toplamMaas:'25000',bankaMaas:'22500'};
+  localStorage.setItem('mesai_settings',JSON.stringify(s));
+  // Bu ay (2026-05)
+  const thisKey='2026-05';
+  const recs2605=[
+    {ts:1746057600,gun:1,giris:'08:00',cikis:'19:30',mesaiMin:150,isCmt:false,isPaz:false,not:'Proje sunum hazırlığı'},
+    {ts:1746144000,gun:2,giris:'08:00',cikis:'18:00',mesaiMin:60,isCmt:false,isPaz:false,not:''},
+    {ts:1746316800,gun:4,giris:'08:00',cikis:'20:15',mesaiMin:195,isCmt:false,isPaz:false,not:'Müşteri toplantısı'},
+    {ts:1746403200,gun:5,giris:'08:00',cikis:'17:45',mesaiMin:105,isCmt:false,isPaz:false,not:''},
+    {ts:1746489600,gun:6,giris:'09:00',cikis:'14:30',mesaiMin:90,isCmt:true,isPaz:false,not:'Cumartesi mesai'},
+    {ts:1746576000,gun:7,giris:'10:00',cikis:'13:00',mesaiMin:60,isCmt:false,isPaz:true,not:'Pazar acil'},
+    {ts:1746662400,gun:8,giris:'08:00',cikis:'18:30',mesaiMin:150,isCmt:false,isPaz:false,not:''},
+    {ts:1746748800,gun:9,giris:'08:00',cikis:'17:00',mesaiMin:0,isCmt:false,isPaz:false,not:'Normal gün'},
+    {ts:1746835200,gun:10,giris:'08:00',cikis:'17:00',mesaiMin:-60,isCmt:false,isPaz:false,not:'Erken çıkış — doktor'},
+    {ts:1746921600,gun:12,giris:'08:00',cikis:'19:00',mesaiMin:120,isCmt:false,isPaz:false,not:'Sprint kapanış'},
+    {ts:1747008000,gun:13,giris:'08:00',cikis:'18:45',mesaiMin:105,isCmt:false,isPaz:false,not:''},
+    {ts:1747094400,gun:14,giris:'08:00',cikis:'20:30',mesaiMin:210,isCmt:false,isPaz:false,not:'Yoğun gün, deadline'},
+    {ts:1747180800,gun:15,giris:'08:00',cikis:'18:00',mesaiMin:60,isCmt:false,isPaz:false,not:''},
+    {ts:1747267200,gun:16,giris:'08:00',cikis:'17:30',mesaiMin:30,isCmt:false,isPaz:false,not:''},
+    {ts:1747353600,gun:17,giris:'09:30',cikis:'14:00',mesaiMin:30,isCmt:true,iPaz:false,not:'Cumartesi kısa'},
+    {ts:1747526400,gun:19,giris:'08:00',cikis:'19:15',mesaiMin:135,isCmt:false,isPaz:false,not:''},
+    {ts:1747612800,gun:20,giris:'08:00',cikis:'18:00',mesaiMin:60,isCmt:false,isPaz:false,not:'Kod review'},
+    {ts:1747699200,gun:21,giris:'08:00',cikis:'21:00',mesaiMin:240,isCmt:false,isPaz:false,not:'Canlıya alım gecesi'},
+    {ts:1747785600,gun:22,giris:'08:00',cikis:'18:15',mesaiMin:75,isCmt:false,isPaz:false,not:''},
+    {ts:1747872000,gun:23,giris:'08:00',cikis:'17:00',mesaiMin:0,isCmt:false,isPaz:false,not:'Normal'},
+    {ts:1747958400,gun:26,giris:'08:00',cikis:'19:30',mesaiMin:150,isCmt:false,isPaz:false,not:''},
+    {ts:1748044800,gun:27,giris:'08:00',cikis:'18:00',mesaiMin:60,isCmt:false,isPaz:false,not:''},
+    {ts:1748131200,gun:28,giris:'08:00',cikis:'17:30',mesaiMin:30,isCmt:false,isPaz:false,not:'Ayın son sprint'},
+    {ts:1748217600,gun:29,giris:'08:00',cikis:'19:45',mesaiMin:165,isCmt:false,isPaz:false,not:''},
+    {ts:1748304000,gun:30,giris:'08:00',cikis:'18:00',mesaiMin:60,isCmt:false,isPaz:false,not:'Ay sonu raporu'},
+  ];
+  localStorage.setItem('mesai_recs_'+thisKey,JSON.stringify(recs2605));
+  // Nisan 2026
+  const aprKey='2026-04';
+  const recs2604=[
+    {ts:1743465600,gun:1,giris:'08:00',cikis:'18:30',mesaiMin:90,isCmt:false,isPaz:false,not:''},
+    {ts:1743552000,gun:2,giris:'08:00',cikis:'19:00',mesaiMin:120,isCmt:false,isPaz:false,not:'Toplantı günü'},
+    {ts:1743638400,gun:3,giris:'08:00',cikis:'17:00',mesaiMin:0,isCmt:false,isPaz:false,not:''},
+    {ts:1743724800,gun:4,giris:'08:00',cikis:'20:00',mesaiMin:180,isCmt:false,isPaz:false,not:'Ay sonu kapanış'},
+    {ts:1743811200,gun:5,giris:'09:00',cikis:'13:30',mesaiMin:30,isCmt:true,isPaz:false,not:'Cumartesi kısa'},
+    {ts:1743984000,gun:7,giris:'08:00',cikis:'18:45',mesaiMin:105,isCmt:false,isPaz:false,not:''},
+    {ts:1744070400,gun:8,giris:'08:00',cikis:'19:30',mesaiMin:150,isCmt:false,isPaz:false,not:''},
+    {ts:1744156800,gun:9,giris:'08:00',cikis:'18:00',mesaiMin:60,isCmt:false,isPaz:false,not:''},
+    {ts:1744243200,gun:10,giris:'08:00',cikis:'21:30',mesaiMin:270,isCmt:false,isPaz:false,not:'Release gece'},
+    {ts:1744329600,gun:11,giris:'08:00',cikis:'17:00',mesaiMin:0,isCmt:false,isPaz:false,not:'Telafi dinlendi'},
+    {ts:1744588800,gun:14,giris:'08:00',cikis:'19:00',mesaiMin:120,isCmt:false,isPaz:false,not:''},
+    {ts:1744675200,gun:15,giris:'08:00',cikis:'18:30',mesaiMin:90,isCmt:false,isPaz:false,not:''},
+    {ts:1744761600,gun:16,giris:'08:00',cikis:'17:30',mesaiMin:30,isCmt:false,isPaz:false,not:''},
+    {ts:1744848000,gun:17,giris:'08:00',cikis:'19:45',mesaiMin:165,isCmt:false,isPaz:false,not:'Müşteri demo'},
+    {ts:1744934400,gun:18,giris:'08:00',cikis:'18:00',mesaiMin:60,isCmt:false,isPaz:false,not:''},
+    {ts:1745193600,gun:21,giris:'08:00',cikis:'20:00',mesaiMin:180,isCmt:false,isPaz:false,not:''},
+    {ts:1745280000,gun:22,giris:'08:00',cikis:'18:15',mesaiMin:75,isCmt:false,isPaz:false,not:''},
+    {ts:1745366400,gun:23,giris:'08:00',cikis:'18:00',mesaiMin:60,isCmt:false,isPaz:false,not:''},
+    {ts:1745452800,gun:24,giris:'08:00',cikis:'17:00',mesaiMin:-30,isCmt:false,isPaz:false,not:'Erken çıkış'},
+    {ts:1745539200,gun:25,giris:'08:00',cikis:'19:00',mesaiMin:120,isCmt:false,isPaz:false,not:''},
+    {ts:1745798400,gun:28,giris:'08:00',cikis:'18:45',mesaiMin:105,isCmt:false,isPaz:false,not:''},
+    {ts:1745884800,gun:29,giris:'08:00',cikis:'19:30',mesaiMin:150,isCmt:false,isPaz:false,not:'Sprint kapanış'},
+    {ts:1745971200,gun:30,giris:'08:00',cikis:'18:00',mesaiMin:60,isCmt:false,isPaz:false,not:'Ay son gün'},
+  ];
+  localStorage.setItem('mesai_recs_'+aprKey,JSON.stringify(recs2604));
+  // Finans — Nisan
+  const finApr={gelirler:[{id:1,ad:'Prim',tutar:'3500'},{id:2,ad:'Freelance',tutar:'8000'}],giderler:[{id:3,ad:'Kira',tutar:'12000'},{id:4,ad:'Faturalar',tutar:'2400'},{id:5,ad:'Market',tutar:'4800'},{id:6,ad:'Ulaşım',tutar:'1200'}]};
+  localStorage.setItem('mesai_finans_'+aprKey,JSON.stringify(finApr));
+  // Finans — Bu ay
+  const finMay={gelirler:[{id:10,ad:'Prim',tutar:'4000'}],giderler:[{id:11,ad:'Kira',tutar:'12000'},{id:12,ad:'Faturalar',tutar:'2600'},{id:13,ad:'Market',tutar:'5100'}]};
+  localStorage.setItem('mesai_finans_'+thisKey,JSON.stringify(finMay));
+  localStorage.setItem('mesai_current',thisKey);
+  localStorage.setItem('mesai_demo_seeded','1');
+})();
 
 // ── INIT ───────────────────────────────────────────────
 document.getElementById('set-ucret').value=fmtShow(settings.saatlikUcret);
@@ -1845,6 +2298,7 @@ document.getElementById('set-banka').value=fmtShow(settings.bankaMaas);
 initTheme();
 refreshAll();
 updatePickerButtons();
+initNotifUI();
 </script>
 </body>
 </html>
